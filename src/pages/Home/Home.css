@@ -1,0 +1,241 @@
+.home {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 40px 20px;
+  color: #0a2540;
+  background-color: #ffffff;
+  scroll-behavior: smooth;
+}
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  padding: 80px 20px;
+  background-color: #f0f4f8;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+.hero-section h1 {
+  font-size: 48px;
+  font-weight: bold;
+  color: #0a2540;
+  margin-bottom: 16px;
+}
+
+.hero-section p {
+  font-size: 20px;
+  color: #4a5568;
+  margin-bottom: 32px;
+}
+
+.hero-section button {
+  background-color: #63b3ed;
+  color: white;
+  border: none;
+  padding: 14px 36px;
+  font-size: 16px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.hero-section button:hover {
+  background-color: #4299e1;
+  transform: translateY(-2px);
+}
+
+/* Features Section */
+.features-section {
+  margin-top: 60px;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.features-section h2 {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: #0a2540;
+}
+
+.features-section ul {
+  list-style: none;
+  padding-left: 0;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+  color: #2d3748;
+}
+
+.features-section ul li {
+  font-size: 18px;
+  margin-bottom: 16px;
+  position: relative;
+  padding-left: 24px;
+}
+
+.features-section ul li::before {
+  content: '✔';
+  position: absolute;
+  left: 0;
+  color: #63b3ed;
+  font-weight: bold;
+}
+
+/* Charts Section */
+.charts-section {
+  margin-top: 80px;
+}
+
+.chart-block {
+  display: flex;
+  align-items: center;
+  margin-bottom: 60px;
+  flex-wrap: wrap;
+  transition: transform 0.3s ease;
+}
+
+.chart-block:hover {
+  transform: scale(1.01);
+}
+
+.chart-block.left-img {
+  flex-direction: row;
+}
+
+.chart-block.right-img {
+  flex-direction: row-reverse;
+}
+
+.chart-img {
+  flex: 1 1 300px;
+  max-width: 500px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  margin: 20px;
+}
+
+.chart-description {
+  flex: 1 1 300px;
+  padding: 20px;
+}
+
+.chart-description h3 {
+  font-size: 24px;
+  margin-bottom: 12px;
+  color: #1a202c;
+}
+
+.chart-description p {
+  font-size: 16px;
+  color: #2d3748;
+  line-height: 1.6;
+}
+
+/* Hope Section */
+.hope-section {
+  margin-top: 80px;
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #ebf8ff;
+  border-radius: 12px;
+}
+
+.hope-section h2 {
+  font-size: 28px;
+  color: #2b6cb0;
+  margin-bottom: 16px;
+}
+
+.hope-section p {
+  font-size: 18px;
+  color: #2d3748;
+  max-width: 700px;
+  margin: 0 auto 24px;
+}
+
+.hope-img {
+  max-width: 300px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .chart-block.left-img,
+  .chart-block.right-img {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .chart-description {
+    padding: 0 10px;
+  }
+
+  .chart-img {
+    max-width: 100%;
+    margin: 10px auto;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-in forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 1s ease-out forwards;
+}
+
+/* Why Choose Us Section */
+.why-choose-section {
+  background-color: #f7fafc;
+  padding: 60px 20px;
+  border-radius: 12px;
+  margin-top: 80px;
+  text-align: center;
+}
+
+.why-choose-section h2 {
+  font-size: 30px;
+  color: #2b6cb0;
+  margin-bottom: 24px;
+}
+
+.why-choose-section ul {
+  list-style: none;
+  padding: 0;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.why-choose-section li {
+  font-size: 18px;
+  color: #2d3748;
+  margin-bottom: 16px;
+  position: relative;
+  padding-left: 24px;
+}
+
+.why-choose-section li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #63b3ed;
+  font-weight: bold;
+}

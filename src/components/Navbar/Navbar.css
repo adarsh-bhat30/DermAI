@@ -1,0 +1,93 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background-color: #0a2540; 
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  height: 40px;
+  cursor: pointer;
+}
+
+.navbar-menu {
+  list-style: none;
+  display: flex;
+  gap: 28px;
+  margin: 0;
+  padding: 0;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.navbar-menu li {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.navbar-menu li:hover,
+.navbar-menu li a:hover,
+.scroll-link:hover {
+  color: #63b3ed; 
+}
+
+.navbar-menu li a,
+.scroll-link {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.navbar .active a {
+  color: #63b3ed;
+  padding-bottom: 2px;
+  border-bottom: 2px solid #63b3ed;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.navbar-right img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  filter: invert(1); 
+  transition: transform 0.2s ease;
+}
+
+.navbar-right img:hover {
+  transform: scale(1.1);
+}
+
+.navbar-right button {
+  background-color: #63b3ed; 
+  border: none;
+  color: #0a2540;
+  padding: 8px 18px;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-right button:hover {
+  background-color: #4299e1; 
+}
+
+
+
+
+
+
+

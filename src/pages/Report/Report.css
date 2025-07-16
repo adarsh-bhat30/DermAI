@@ -1,0 +1,57 @@
+.report-container {
+  max-width: 700px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.report-container h1 {
+  font-size: 28px;
+  margin-bottom: 25px;
+  color: #2c3e50;
+  text-align: center;
+}
+
+.report-container p {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.report-image {
+  text-align: center;
+  margin: 25px 0;
+}
+
+.report-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+/* Default style (optional fallback) */
+.report-result {
+  margin-top: 25px;
+  font-size: 18px;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #b7dfc2;
+}
+
+/* Benign - green */
+.benign-result {
+  color: #2d862d;
+  background-color: #e6f4ea;
+  border: 1px solid #b7dfc2;
+}
+
+/* Malignant - red */
+.malignant-result {
+  color: #c0392b;
+  background-color: #fde5e5;
+  border: 1px solid #f5b7b1;
+}

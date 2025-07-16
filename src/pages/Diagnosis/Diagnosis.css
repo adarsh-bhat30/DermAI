@@ -1,0 +1,119 @@
+.diagnosis-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 24px;
+  background-color: #f5f9ff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+
+h1 {
+  color: #0a2540;
+  margin-bottom: 24px;
+}
+
+.diagnosis-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+label {
+  font-weight: 600;
+  color: #0a2540;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  margin-top: 6px;
+  padding: 10px 14px;
+  font-size: 16px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border: 1.5px solid #cbd5e0;
+  border-radius: 8px;
+  outline-color: #63b3ed;
+  transition: border-color 0.3s ease;
+  background-color: white;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+  border-color: #4299e1;
+}
+
+.upload-label {
+  margin-top: 8px;
+  padding: 12px 24px;
+  background-color: #63b3ed;
+  color: #0a2540;
+  font-weight: 600;
+  border-radius: 24px;
+  cursor: pointer;
+  display: inline-block;
+  width: fit-content;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  position: relative;
+}
+
+.upload-label input[type="file"] {
+  display: none;
+}
+
+.upload-label:hover {
+  background-color: #4299e1;
+}
+
+.image-preview {
+  margin: 20px 0;
+}
+
+.image-preview img {
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.analyze-button {
+  background-color: #0a2540;
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  font-weight: 700;
+  font-size: 16px;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.analyze-button:disabled {
+  background-color: #a0aec0;
+  cursor: not-allowed;
+}
+
+.analyze-button:hover:not(:disabled) {
+  background-color: #06315a;
+}
+
+.diagnosis-result {
+  margin-top: 30px;
+  font-size: 18px;
+  color: #2d3748;
+  font-weight: 600;
+  background-color: #e6f0ff;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #63b3ed;
+  text-align: center;
+}
