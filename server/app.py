@@ -1,8 +1,5 @@
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify
 from flask_cors import CORS
-import os
-from werkzeug.utils import secure_filename
-import uuid
 import logging
 from PIL import Image
 import numpy as np
@@ -11,6 +8,8 @@ import tensorflow as tf
 from tensorflow.keras.models import load_model
 import joblib
 from dotenv import load_dotenv
+from io import BytesIO
+import os
 
 # === Load environment variables (optional) ===
 load_dotenv()
@@ -19,13 +18,9 @@ app = Flask(__name__)
 CORS(app)
 
 # === Configuration ===
-UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 MAX_CONTENT_LENGTH = 5 * 1024 * 1024  # 5MB
-
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = MAX_CONTENT_LENGTH
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # === Paths from environment or fallback ===
 MODEL_PATH = os.getenv("MODEL_PATH", r"C:\Users\adars\DermAI_new\model\best_model_b4_final1.keras")
@@ -50,11 +45,13 @@ logging.basicConfig(
 model = load_model(MODEL_PATH)
 age_scaler = joblib.load(SCALER_PATH)
 
+# === Helper Functions ===
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def preprocess_image(image_path):
-    with Image.open(image_path) as image:
+def preprocess_image(image_file):
+    """Process image entirely in memory"""
+    with Image.open(image_file) as image:
         image = image.convert("RGB").resize((380, 380))
         img_array = np.array(image).astype(np.float32) / 255.0
         return tf.expand_dims(img_array, axis=0)
@@ -62,7 +59,6 @@ def preprocess_image(image_path):
 def preprocess_metadata(age, sex, location):
     try:
         age_normalized = age_scaler.transform(pd.DataFrame({'age': [age]}))[0][0]
-
     except Exception as e:
         raise ValueError(f"Age normalization failed: {e}")
 
@@ -72,11 +68,15 @@ def preprocess_metadata(age, sex, location):
 
     location_key = f'binary_{location.lower()}'
     if location_key not in metadata_features:
-        raise ValueError(f"Invalid location: {location}. Must be one of {[f.replace('binary_', '') for f in metadata_features if f.startswith('binary_')]}")
+        raise ValueError(
+            f"Invalid location: {location}. Must be one of "
+            f"{[f.replace('binary_', '') for f in metadata_features if f.startswith('binary_')]}"
+        )
 
     meta_array[0, metadata_features.index(location_key)] = 1
     return meta_array
 
+# === Routes ===
 @app.route('/api/diagnosis', methods=['POST'])
 def diagnosis():
     try:
@@ -97,16 +97,13 @@ def diagnosis():
         except ValueError:
             return jsonify({'error': 'Invalid age value'}), 400
 
-        filename = secure_filename(image.filename)
-        unique_filename = f"{uuid.uuid4().hex}_{filename}"
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], unique_filename)
-        image.save(filepath)
+        logging.info(f"Processing: name={name}, age={age}, sex={sex}, location={location}, file={image.filename}")
 
-        logging.info(f"Processing: name={name}, age={age}, sex={sex}, location={location}, file={filename}")
-
-        image_input = preprocess_image(filepath)
+        # Process image in memory
+        image_input = preprocess_image(BytesIO(image.read()))
         metadata_input = preprocess_metadata(age, sex, location)
 
+        # Make prediction
         prediction = model.predict([image_input, metadata_input])[0][0]
 
         if prediction >= 0.5:
@@ -123,7 +120,6 @@ def diagnosis():
                 'age': age,
                 'sex': sex,
                 'location': location,
-                'image_url': f'/uploads/{unique_filename}',
                 'prediction': {
                     'label': predicted_class,
                     'confidence': round(confidence, 2)
@@ -135,13 +131,10 @@ def diagnosis():
         logging.exception("Prediction failed:")
         return jsonify({'error': f'Prediction failed: {str(e)}'}), 500
 
-@app.route('/uploads/<filename>')
-def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
-
 @app.route('/health', methods=['GET'])
 def health():
     return jsonify({'status': 'OK'}), 200
 
+# === Main Entry ===
 if __name__ == '__main__':
     app.run(port=510, debug=True)
