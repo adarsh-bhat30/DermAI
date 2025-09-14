@@ -28,8 +28,8 @@ app.config['MAX_CONTENT_LENGTH'] = MAX_CONTENT_LENGTH
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # === Paths from environment or fallback ===
-MODEL_PATH = os.getenv("MODEL_PATH", r"C:\DermAi\best_model_b4_final1.keras")
-SCALER_PATH = os.getenv("SCALER_PATH", r"C:\DermAi\age_scaler.save")
+MODEL_PATH = os.getenv("MODEL_PATH", r"C:\Users\adars\DermAI_new\model\best_model_b4_final1.keras")
+SCALER_PATH = os.getenv("SCALER_PATH", r"C:\Users\adars\DermAI_new\model\age_scaler.save")
 
 # === Metadata Features ===
 metadata_features = [
